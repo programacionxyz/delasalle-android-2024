@@ -8,9 +8,14 @@ fun removeMultipleWhiteSpaces2(text:String):String{
     return regex.replace(text," ")
 }
 
+fun String.removeMultipleWhiteSpaces():String{
+    val regex = Regex("\\s+")
+    return regex.replace(this," ")
+}
+
 fun main(){
-    val text = "My Text     with    white     Spaces"
+    val text = "My Text   with   white     Spaces"
     println(text)
     println(removeMultipleWhiteSpaces2(text))
-    // println(text.removeMultipleWhiteSpaces())
+    println(text.removeMultipleWhiteSpaces())
 }

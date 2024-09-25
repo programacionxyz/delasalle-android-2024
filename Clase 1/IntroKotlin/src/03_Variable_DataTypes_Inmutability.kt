@@ -3,10 +3,15 @@
 fun main(){
 
     // EXAMPLE 1. Var
+    var firstName = ""
+    val lastName = ""
+    var secondName:String = ""
 
     // EXAMPLE 2. Immutability
 
     // ERROR
+    firstName = firstName + " "
+    // lastName = "" ERROR
 
     // Data Types
     val booleanVar: Boolean = true
