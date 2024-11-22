@@ -1,7 +1,13 @@
 package com.galagox.notesapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(tableName = "note_table")
 data class Note(
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val description: String
 )
+

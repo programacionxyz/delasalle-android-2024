@@ -61,12 +61,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-
 
     // implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     // implementation("androidx.room:room-runtime:2.6.1")

@@ -13,6 +13,11 @@ import com.galagox.localstorageapp.ui.viewmodels.FileStorageViewModel
 @Composable
 fun FileStorageScreen( innerPaddingValues: PaddingValues, viewModel: FileStorageViewModel = viewModel()) {
 
+    val context = LocalContext.current
+    val inputText = viewModel.inputText.collectAsState()
+    val fileContent = viewModel.fileContent.collectAsState()
+    val fileName = "example.txt"
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -20,25 +25,25 @@ fun FileStorageScreen( innerPaddingValues: PaddingValues, viewModel: FileStorage
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         TextField(
-            value = "",
-            onValueChange = { },
+            value = inputText.value,
+            onValueChange = { viewModel.onInputChange(it) },
             label = { Text("Texto para guardar") },
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = {  },
+            onClick = { viewModel.writeToFile(context,fileName) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Guardar en archivo")
         }
         Button(
-            onClick = {  },
+            onClick = { viewModel.readFromFile(context,fileName) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Leer desde archivo")
         }
         Text(
-            text = "Contenido del archivo",
+            text = "Contenido del archivo ${fileContent.value}",
             style = MaterialTheme.typography.bodyMedium
         )
     }

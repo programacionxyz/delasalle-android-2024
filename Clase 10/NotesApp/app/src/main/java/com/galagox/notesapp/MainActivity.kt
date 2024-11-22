@@ -24,7 +24,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val repository = NoteRepository()
+        val db = databaseBuilder(applicationContext,
+            NoteDatabase::class.java,
+            "note_database").build()
+        val repository = NoteRepository(db.noteDao())
 
         setContent {
             Scaffold(
