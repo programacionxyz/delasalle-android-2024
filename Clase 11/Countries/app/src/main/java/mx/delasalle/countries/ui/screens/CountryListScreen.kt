@@ -35,7 +35,7 @@ import mx.delasalle.countries.ui.viewmodels.CountryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryListScreen(countryViewModel: CountryViewModel = viewModel()) {
+fun CountryListScreen(countryViewModel: CountryViewModel) {
     val uiState by countryViewModel.uiState.collectAsState()
 
     Scaffold(

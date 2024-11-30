@@ -9,10 +9,34 @@ import mx.delasalle.countries.model.CountryItem
 import mx.delasalle.countries.model.Flags
 import mx.delasalle.countries.model.Name
 
-class CountryRepository(private val api: CountryApiService) {
+class CountryRepository(
+    private val api: CountryApiService,
+    private val countryDao: CountryDao
+) {
 
     suspend fun getCountries(): List<Country> {
-        val result = api.getAllCountries()
-        return result
+        try {
+            val result = api.getAllCountries()
+            result.forEach { country ->
+                val countryItem = CountryItem(
+                    id = 0,
+                    name = country.name.common,
+                    capital = country.capital?.joinToString(", ") ?: "NA"
+                )
+                countryDao.insert(countryItem)
+            }
+            return result
+        } catch (e: Exception) {
+            val countries:MutableList<Country> = mutableListOf()
+            val countryItemList = countryDao.getAllCountries().first()
+            countryItemList.map{ countryItem ->
+                countries.add(Country(
+                    name = Name( common = countryItem.name, official = ""),
+                    capital = listOf(countryItem.capital),
+                    flags = Flags(png = null, svg = null)
+                ))
+            }
+            return countries
+        }
     }
 }

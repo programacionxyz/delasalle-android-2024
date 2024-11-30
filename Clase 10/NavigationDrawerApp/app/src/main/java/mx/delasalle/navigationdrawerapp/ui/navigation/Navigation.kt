@@ -11,5 +11,9 @@ import mx.delasalle.navigationdrawerapp.ui.screens.SettingsScreen
 
 @Composable
 fun Navigation(navController: NavHostController, modifier: Modifier = Modifier) {
-
+    NavHost(navController= navController, startDestination = "home", modifier = modifier){
+        composable("home"){ HomeScreen()}
+        composable("settings"){ SettingsScreen()}
+        composable("profile"){ ProfileScreen()}
+    }
 }

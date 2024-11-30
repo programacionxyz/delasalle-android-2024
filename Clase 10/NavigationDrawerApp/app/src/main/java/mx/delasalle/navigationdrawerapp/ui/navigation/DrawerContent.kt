@@ -47,16 +47,17 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 
 
-
 @Composable
 fun DrawerContent(navController: NavHostController, onCloseDrawer: () -> Unit) {
     ModalDrawerSheet {
         Spacer(modifier = Modifier.height(16.dp))
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 16.dp),
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 16.dp),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start ) {
+            horizontalAlignment = Alignment.Start
+        ) {
             Text(
                 text = "Drawer Header",
                 modifier = Modifier
@@ -66,7 +67,24 @@ fun DrawerContent(navController: NavHostController, onCloseDrawer: () -> Unit) {
                 textAlign = TextAlign.Left
             )
             HorizontalDivider()
-            /* DrawerItem() */
+            DrawerItem(text = "Home", icon = Icons.Default.Home,
+                onClick = {
+                    navController.navigate("home")
+                    onCloseDrawer()
+                }
+            )
+            DrawerItem(text = "Profile", icon = Icons.Default.AccountCircle,
+                onClick = {
+                    navController.navigate("profile")
+                    onCloseDrawer()
+                }
+            )
+            DrawerItem(text = "Settings", icon = Icons.Default.Settings,
+                onClick = {
+                    navController.navigate("settings")
+                    onCloseDrawer()
+                }
+            )
 
         }
     }
@@ -74,5 +92,24 @@ fun DrawerContent(navController: NavHostController, onCloseDrawer: () -> Unit) {
 }
 
 @Composable
-fun DrawerItem(text: String, icon: androidx.compose.ui.graphics.vector.ImageVector, onClick: () -> Unit) {
+fun DrawerItem(
+    text: String, icon: androidx.compose.ui.graphics.vector.ImageVector,
+    onClick: () -> Unit
+) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .clickable(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            icon, contentDescription = null, modifier = Modifier
+                .size(48.dp)
+                .padding(end = 16.dp)
+        )
+        Text(text, fontSize = 18.sp)
+    }
+
 }

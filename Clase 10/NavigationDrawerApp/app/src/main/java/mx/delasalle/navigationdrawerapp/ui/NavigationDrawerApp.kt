@@ -57,7 +57,13 @@ fun NavigationDrawerApp() {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = { },
+        drawerContent = {
+            DrawerContent(navController = navController, onCloseDrawer = {
+                scope.launch {
+                    drawerState.close()
+                }
+            })
+        },
         content = {
             Scaffold(
                 topBar = {
@@ -71,7 +77,9 @@ fun NavigationDrawerApp() {
                         },
                         navigationIcon = {
                             IconButton(onClick = {
-
+                                scope.launch {
+                                    drawerState.open()
+                                }
                             }) {
                                 Icon(Icons.Default.Menu, contentDescription = "Menu",tint = Color.White)
                             }
@@ -82,8 +90,8 @@ fun NavigationDrawerApp() {
                     )
                 }
             ) { paddingValues ->
-                HomeScreen()
-                // Navigation(navController = navController, modifier = Modifier.padding(padding))
+                Navigation(navController = navController,
+                    modifier = Modifier.padding(paddingValues))
             }
         }
     )

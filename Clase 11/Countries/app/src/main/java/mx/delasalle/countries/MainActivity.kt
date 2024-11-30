@@ -24,8 +24,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val db = databaseBuilder(
+            applicationContext,
+            CountryDatabase::class.java,"country_database"
+        ).build()
+
         val api = RetrofitInstance.api
-        val countryRepository = CountryRepository(api)
+        val countryRepository = CountryRepository(api,db.countryDao())
         val countryViewModel =  CountryViewModel (countryRepository)
 
         setContent {
